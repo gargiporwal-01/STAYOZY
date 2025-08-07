@@ -58,6 +58,7 @@ app.post("/listings", async (req, res) => {
     res.redirect("/listings");
 });
 
+
 // -------------------EDIT ROUTE-------------------
 app.get("/listings/:id/edit",async (req, res) => {
     let {id} = req.params;
