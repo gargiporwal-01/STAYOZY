@@ -35,7 +35,7 @@ StayOzy is a full-stack web application inspired by **Airbnb** where users can e
 - MVC Pattern  
 
 **Deployment**  
-- [Heroku / Render / Railway] *(update with your link)*  
+- Render 
 
 ---
 
