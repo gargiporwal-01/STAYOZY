@@ -39,5 +39,5 @@ StayOzy is a full-stack web application inspired by **Airbnb** where users can e
 
 ---
 
-## 📂 Project Structure  
+
 
