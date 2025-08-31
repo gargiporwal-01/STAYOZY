@@ -27,7 +27,7 @@ StayOzy is a full-stack web application inspired by **Airbnb** where users can e
 - Node.js  
 - Express.js  
 
-**Database & Auth**  
+**Database & Authorization**  
 - MongoDB Atlas (Mongoose ODM)  
 - Passport.js, Express-Session, Connect-Flash  
 
