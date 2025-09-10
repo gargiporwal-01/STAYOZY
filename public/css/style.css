@@ -123,3 +123,25 @@ body {
     width: 96vh;
 }
 
+
+/* Auth Pages */
+.auth-card {
+    border: 1px solid #f2f2f2;
+    border-radius: 1rem;
+}
+.auth-icon {
+    color: #f54284;
+    font-size: 2rem;
+}
+.btn-brand {
+    background-color: #f54284 !important;
+    color: #fff !important;
+    border: none !important;
+}
+.btn-brand:hover {
+    filter: brightness(0.95);
+}
+.input-group-text {
+    background-color: #fff;
+}
+
