@@ -1,113 +1,31 @@
-<% layout("/layouts/auth") %>
+<% layout("/layouts/boilerplate") %>
 
-<style>
-  .auth-wrapper {
-    min-height: calc(100vh - 72px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .auth-card {
-    border: 0;
-    border-radius: 1rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    overflow: hidden;
-  }
-  .auth-card .card-header {
-    background: linear-gradient(135deg, #f54284 0%, #ff7aa8 100%);
-    color: #fff;
-  }
-  .auth-card .card-header h2 {
-    margin: 0;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-  }
-  .input-icon {
-    position: absolute;
-    left: 12px;
-    top: 72%;
-    transform: translateY(-50%);
-    color: #a0a0a0;
-  }
-  .with-icon input {
-    padding-left: 2.35rem;
-  }
-  .password-toggle {
-    position: absolute;
-    right: 12px;
-    top: 72%;
-    transform: translateY(-50%);
-    color: #6c757d;
-    cursor: pointer;
-  }
-  .muted-link {
-    color: #6c757d;
-    text-decoration: none;
-  }
-  .muted-link:hover { text-decoration: underline; }
-</style>
-
-<div class="auth-wrapper">
-  <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
-    <div class="card auth-card">
-      <div class="card-header p-4">
-        <h2 class="h3 mb-1">Welcome back</h2>
-        <p class="mb-0">Log in to continue exploring amazing stays.</p>
-      </div>
-      <div class="card-body p-4 p-sm-5">
+<div class="row mt-3">
+    <h2 class="col-6 offset-3">Login</h2>
+    <div class="col-6 offset-3">
         <form action="/login" method="POST" novalidate class="needs-validation">
-          <div class="mb-3 position-relative with-icon">
-            <label for="username" class="form-label">Username</label>
-            <i class="fa-solid fa-user input-icon"></i>
-            <input 
-              name="username" 
-              id="username" 
-              type="text" 
-              class="form-control" 
-              placeholder="your_username"
-              required
-            >
-          </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input 
+                  name="username" 
+                  id="username" 
+                  type="text" 
+                  class="form-control" 
+                  required
+                >
+            </div>
 
-          <div class="mb-2 position-relative with-icon">
-            <label for="password" class="form-label">Password</label>
-            <i class="fa-solid fa-lock input-icon"></i>
-            <input 
-              name="password" 
-              id="password" 
-              type="password" 
-              class="form-control" 
-              placeholder="••••••••"
-              required
-            >
-            <span class="password-toggle" data-target="password">
-              <i class="fa-regular fa-eye"></i>
-            </span>
-          </div>
-
-          <div class="d-flex align-items-center justify-content-between mb-4">
-            <span class="small">Don't have an account? <a href="/signup">Sign up</a></span>
-            <button class="btn btn-dark px-4" type="submit">Login</button>
-          </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input 
+                  name="password" 
+                  id="password" 
+                  type="password" 
+                  class="form-control" 
+                  required
+                >
+            </div>
+            <button class="btn btn-success">Login</button>
         </form>
-      </div>
     </div>
-  </div>
-  
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const toggles = document.querySelectorAll('.password-toggle');
-    toggles.forEach(t => {
-      t.addEventListener('click', function() {
-        const targetId = this.getAttribute('data-target');
-        const input = document.getElementById(targetId);
-        if (!input) return;
-        const isPassword = input.getAttribute('type') === 'password';
-        input.setAttribute('type', isPassword ? 'text' : 'password');
-        this.innerHTML = isPassword ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
-      });
-    });
-  });
-</script>

@@ -1,6 +1,8 @@
 const { Query } = require("mongoose");
 const Listing = require("../models/listing");
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapToken = process.env.MAP_TOKEN;
+const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 module.exports.index = async (req, res) => {
     const { search, results } = req.query;
@@ -75,19 +77,12 @@ module.exports.showListing = async (req, res) => {
 };
 
 module.exports.createListing = async (req, res, next) => {
-    if (!process.env.MAP_TOKEN) {
-        req.flash("error", "Map service is not configured. Please try again later.");
-        return res.redirect("/listings/new");
-    }
-
-    const geocodingClient = mbxGeocoding({ accessToken: process.env.MAP_TOKEN });
-
     let response = await geocodingClient
-      .forwardGeocode({
+     .forwardGeocode({
         query: req.body.listing.location,
         limit: 1,
-      })
-      .send();
+    })
+    .send();
 
     let url = req.file.path;
     let filename = req.file.filename;

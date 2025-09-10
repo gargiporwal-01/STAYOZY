@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV != "production") {
   require('dotenv').config();
 }
+console.log(process.env.SECRET);
 
 const express = require("express");
 const app = express();
@@ -20,7 +21,7 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const dbUrl = process.env.ATLASDB_URL || process.env.MONGO_URL || "mongodb://127.0.0.1:27017/stayozy";
+const dbUrl = process.env.ATLASDB_URL;
 
 main()
   .then(() => {
@@ -41,28 +42,21 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-let store;
-try {
-  store = MongoStore.create({
-    mongoUrl : dbUrl,
-    crypto : {
-      secret : process.env.SECRET || "mysupersecretcode",
-    },
-    touchAfter : 24 * 3600,
-  });
-} catch (err) {
-  console.error("Failed to initialize Mongo session store", err);
-}
+const store = MongoStore.create({
+  mongoUrl : dbUrl,
+  crypto : {
+    secret : process.env.SECRET,
+  },
+  touchAfter : 24 * 3600,
+});
 
-if (store) {
-  store.on("error", (err) => {
-    console.log("ERROR in MONGO SESSION STORE", err);
-  });
-}
+store.on("error", () => {
+  console.log("ERROR in MONGO SESSION STORE", err);
+});
 
 const sessionOptions = {
-  ...(store ? { store } : {}),
-  secret : process.env.SECRET || "mysupersecretcode",
+  store,
+  secret : process.env.SECRET,
   resave : false,
   saveUninitialized : true,
   cookie : {
@@ -123,7 +117,6 @@ app.use((req, res, next) => {
     //res.status(statusCode).send(message);
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log(`server is listening to port ${PORT}`);
+app.listen(8080, () => {
+    console.log("server is listening to port 8080");
 });

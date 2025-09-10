@@ -1,127 +1,43 @@
-<% layout("/layouts/auth") %>
+<% layout("/layouts/boilerplate") %>
 
-<style>
-  .auth-wrapper {
-    min-height: calc(100vh - 72px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .auth-card {
-    border: 0;
-    border-radius: 1rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    overflow: hidden;
-  }
-  .auth-card .card-header {
-    background: linear-gradient(135deg, #f54284 0%, #ff7aa8 100%);
-    color: #fff;
-  }
-  .auth-card .card-header h2 {
-    margin: 0;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-  }
-  .input-icon {
-    position: absolute;
-    left: 12px;
-    top: 72%;
-    transform: translateY(-50%);
-    color: #a0a0a0;
-  }
-  .with-icon input {
-    padding-left: 2.35rem;
-    height: 48px; /* ensure icon vertically centers on the input line */
-    line-height: 1.25rem;
-  }
-  .password-toggle {
-    position: absolute;
-    right: 12px;
-    top: 72%;
-    transform: translateY(-50%);
-    color: #6c757d;
-    cursor: pointer;
-  }
-  .muted-link {
-    color: #6c757d;
-    text-decoration: none;
-  }
-  .muted-link:hover { text-decoration: underline; }
-</style>
-
-<div class="auth-wrapper">
-  <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
-    <div class="card auth-card">
-      <div class="card-header p-4">
-        <h2 class="h3 mb-1">Create your account</h2>
-        <p class="mb-0">Join Stayozy and discover unique stays worldwide.</p>
-      </div>
-      <div class="card-body p-4 p-sm-5">
+<div class="row mt-3">
+    <h2 class="col-6 offset-3">SignUp on Stayozy</h2>
+    <div class="col-6 offset-3">
         <form action="/signup" method="POST" novalidate class="needs-validation">
-          <div class="mb-3 position-relative with-icon">
-            <label for="username" class="form-label">Username</label>
-            <i class="fa-solid fa-user input-icon"></i>
-            <input 
-              name="username" 
-              id="username" 
-              type="text" 
-              class="form-control" 
-              placeholder="choose_a_username"
-              required
-            >
-          </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input 
+                  name="username" 
+                  id="username" 
+                  type="text" 
+                  class="form-control" 
+                  required
+                >
+                <div class="valid-feedback">Looks good!</div>
+            </div>
 
-          <div class="mb-3 position-relative with-icon">
-            <label for="email" class="form-label">Email</label>
-            <i class="fa-solid fa-envelope input-icon"></i>
-            <input 
-              name="email" 
-              id="email" 
-              type="email" 
-              class="form-control" 
-              placeholder="you@example.com"
-              required
-            >
-          </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input 
+                  name="email" 
+                  id="email" 
+                  type="email" 
+                  class="form-control" 
+                  required
+                >
+            </div>
 
-          <div class="mb-4 position-relative with-icon">
-            <label for="password" class="form-label">Password</label>
-            <i class="fa-solid fa-lock input-icon"></i>
-            <input 
-              name="password" 
-              id="password" 
-              type="password" 
-              class="form-control" 
-              placeholder="Create a strong password"
-              required
-            >
-            <span class="password-toggle" data-target="password">
-              <i class="fa-regular fa-eye "></i>
-            </span>
-          </div>
-
-          <div class="d-flex align-items-center justify-content-between">
-            <span class="small">Already have an account? <a href="/login">Log in</a></span>
-            <button class="btn btn-dark btn-sm px-3" type="submit">Create account</button>
-          </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input 
+                  name="password" 
+                  id="password" 
+                  type="password" 
+                  class="form-control" 
+                  required
+                >
+            </div>
+            <button class="btn btn-success">SignUp</button>
         </form>
-      </div>
     </div>
-  </div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const toggles = document.querySelectorAll('.password-toggle');
-    toggles.forEach(t => {
-      t.addEventListener('click', function() {
-        const targetId = this.getAttribute('data-target');
-        const input = document.getElementById(targetId);
-        if (!input) return;
-        const isPassword = input.getAttribute('type') === 'password';
-        input.setAttribute('type', isPassword ? 'text' : 'password');
-        this.innerHTML = isPassword ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
-      });
-    });
-  });
-</script>
